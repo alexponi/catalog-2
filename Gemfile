@@ -25,7 +25,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 gem 'devise'
 gem 'slim-rails'
-#gem 'temple-0.7.7'
+gem 'evil_icons'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

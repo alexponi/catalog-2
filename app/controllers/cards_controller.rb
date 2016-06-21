@@ -1,5 +1,7 @@
 class CardsController < ApplicationController
   before_action :set_card, only: [:show, :edit, :update, :destroy]
+  before_action :all_tags, only: [:show]
+  respond_to :html, :js
 
   # GET /cards
   # GET /cards.json
@@ -10,6 +12,8 @@ class CardsController < ApplicationController
   # GET /cards/1
   # GET /cards/1.json
   def show
+    @tag = Tag.new
+    @tags = Tag.all
   end
 
   # GET /cards/new
@@ -66,6 +70,11 @@ class CardsController < ApplicationController
     def set_card
       @card = Card.find(params[:id])
     end
+
+    def all_tags
+      @tags = Tag.all
+    end
+
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def card_params

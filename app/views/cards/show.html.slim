@@ -1,5 +1,15 @@
 p#notice = notice
 
+= link_to "New Tag", new_tag_path, remote: true
+
+div id="tags"
+  - @tags.each do |tag|
+      = tag.name + ", "
+
+div
+  br
+  div id="tag_form" style="display:none;"
+
 p
   strong Name:
   = @card.name
@@ -10,3 +20,4 @@ p
 = link_to 'Edit', edit_card_path(@card)
 '|
 = link_to 'Back', cards_path
+
