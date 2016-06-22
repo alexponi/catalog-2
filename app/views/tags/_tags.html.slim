@@ -1,2 +1,4 @@
 - @tags.each do |tag|
-    = tag.name + ", "
+  = " "
+  span.tag
+    = " " + tag.name if tag.present?

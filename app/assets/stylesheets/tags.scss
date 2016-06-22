@@ -1,3 +1,10 @@
 // Place all the styles related to the Tags controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.tag {
+  max-width:15px;
+  background-color: yellow;
+  border: 1px solid #cccccc;
+  border-radius: 0 10px 10px 0;	
+}
