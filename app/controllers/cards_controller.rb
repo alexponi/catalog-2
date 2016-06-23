@@ -1,19 +1,19 @@
-class CardsController < ApplicationController
+class CardsController < ApplicationController  
+  before_action :authenticate_user!
   before_action :set_card, only: [:show, :edit, :update, :destroy]
-  before_action :all_tags, only: [:show]
   respond_to :html, :js
 
   # GET /cards
   # GET /cards.json
   def index
-    @cards = Card.all
+    @cards = Card.where(user_id: current_user.id)
   end
 
   # GET /cards/1
   # GET /cards/1.json
   def show
     @tag = Tag.new
-    @tags = Tag.all
+    @tags = @card.tags
   end
 
   # GET /cards/new
@@ -32,6 +32,7 @@ class CardsController < ApplicationController
 
     respond_to do |format|
       if @card.save
+        @card.update_attribute(:user_id, current_user.id)
         format.html { redirect_to @card, notice: 'Card was successfully created.' }
         format.json { render :show, status: :created, location: @card }
       else
@@ -70,11 +71,6 @@ class CardsController < ApplicationController
     def set_card
       @card = Card.find(params[:id])
     end
-
-    def all_tags
-      @tags = Tag.all
-    end
-
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def card_params

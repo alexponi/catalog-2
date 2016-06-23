@@ -1,6 +1,8 @@
 class TagsController < ApplicationController
-  before_action :set_tag, only: [:show, :edit, :update, :destroy]
-  before_action :all_tags, only: [:index, :create]
+  before_action :authenticate_user!
+  before_action :set_tag, only: [:show, :edit, :update, :destroy]  
+  before_action :set_card, only: [:new, :create]
+  before_action :all_tags, only: [:index, :create]  
   respond_to :html, :js
 
   # GET /tags/1
@@ -19,8 +21,9 @@ class TagsController < ApplicationController
 
   # POST /tags
   # POST /tags.json
-  def create
-    @tag = Tag.create(tag_params)
+  def create        
+    @tag = Tag.create(tag_params)    
+    CardTag.create(card_id: params[:card_id], tag_id: @tag.id)
   end
 
   # PATCH/PUT /tags/1
@@ -54,7 +57,11 @@ class TagsController < ApplicationController
     end
 
     def all_tags
-      @tags = Tag.all
+      @tags = @card.tags
+    end
+
+    def set_card
+      @card = Card.find(params[:card_id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
