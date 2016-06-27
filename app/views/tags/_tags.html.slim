@@ -1,5 +1,10 @@
 - @tags.each do |tag|
-  = " "
+  = " "   
   span.tag
-    = " " + tag.name if tag.present?
-
+    strong
+      = " " + tag.name if tag.present?
+    = " "
+    = link_to "edit", "/tags/#{tag.id}/edit?card_id=#{@card.id}", remote: true
+    = " "
+    = link_to "x ", "/tags/#{tag.id}?card_id=#{@card.id}", method: :delete, data: {confirm: 'A you sure?'}, remote: true
+    = " "  

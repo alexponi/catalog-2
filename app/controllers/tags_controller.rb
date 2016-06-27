@@ -1,8 +1,8 @@
 class TagsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_tag, only: [:show, :edit, :update, :destroy]  
-  before_action :set_card, only: [:new, :create]
-  before_action :all_tags, only: [:index, :create]  
+  before_action :set_card, only: [:new, :create, :edit, :update, :destroy]
+  before_action :all_tags, only: [:index, :create, :edit, :update, :destroy]  
   respond_to :html, :js
 
   # GET /tags/1
@@ -29,25 +29,13 @@ class TagsController < ApplicationController
   # PATCH/PUT /tags/1
   # PATCH/PUT /tags/1.json
   def update
-    respond_to do |format|
-      if @tag.update(tag_params)
-        format.html { redirect_to @tag, notice: 'Tag was successfully updated.' }
-        format.json { render :show, status: :ok, location: @tag }
-      else
-        format.html { render :edit }
-        format.json { render json: @tag.errors, status: :unprocessable_entity }
-      end
-    end
+    @tag.update(tag_params)
   end
 
   # DELETE /tags/1
   # DELETE /tags/1.json
   def destroy
     @tag.destroy
-    respond_to do |format|
-      format.html { redirect_to tags_url, notice: 'Tag was successfully destroyed.' }
-      format.json { head :no_content }
-    end
   end
 
   private
