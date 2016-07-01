@@ -39,7 +39,17 @@ gem 'evil_icons'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
+  gem 'rspec-rails', '~> 3.4'
+  gem 'factory_girl_rails'
 end
+
+# group :test do
+#   gem 'faker'
+#   gem 'capybara'
+#   gem 'database_cleaner'
+#   gem 'launchy'
+#   gem 'selenium-webdriver'
+# end
 
 group :development do
   # Access an IRB console on exception pages or by using <%= console %> in views
